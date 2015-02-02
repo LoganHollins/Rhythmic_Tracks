@@ -2,9 +2,10 @@
 <resources>
 
     <string name="app_name">Rythmic Tracks</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="Home_Page">Run</string>
+    <string name="Music_Page">Music</string>
+    <string name="Statistics_Page">Stats</string>
+    <string name="Settings_Page">Setting</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
