@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RythmicTracks.iml" filepath="$PROJECT_DIR$/RythmicTracks.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Rythmic_Tracks.iml" filepath="$PROJECT_DIR$/Rythmic_Tracks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RhythmicTracks.iml" filepath="$PROJECT_DIR$/RhythmicTracks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Rhythmic_Tracks.iml" filepath="$PROJECT_DIR$/Rhythmic_Tracks.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

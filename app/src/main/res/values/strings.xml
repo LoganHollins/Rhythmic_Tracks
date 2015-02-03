@@ -2,11 +2,12 @@
 <resources>
 
     <string name="app_name">Rythmic Tracks</string>
-    <string name="Home_Page">Run</string>
+    <string name="Home_Page">Home</string>
     <string name="Music_Page">Music</string>
     <string name="Statistics_Page">Stats</string>
     <string name="Settings_Page">Setting</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
