@@ -1,14 +1,8 @@
 package com.rhythmictracks.rhythmictracks;
 
-import java.io.IOException;
 import java.util.Locale;
 
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.database.Cursor;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -19,9 +13,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
 
 public class RhythmicTracks extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -171,43 +162,6 @@ public class RhythmicTracks extends ActionBarActivity implements ActionBar.TabLi
                     return getString(R.string.Settings_Page).toUpperCase(l);
             }
             return null;
-        }
-    }
-
-    public void openMusic(View view) {
-
-        ContentResolver contentResolver = getContentResolver();
-        Uri uri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor cursor = contentResolver.query(uri, null, null, null, null);
-        if (cursor == null) {
-            Toast.makeText(getApplicationContext(), "Null",
-                    Toast.LENGTH_SHORT).show();
-        } else if (!cursor.moveToFirst()) {
-            Toast.makeText(getApplicationContext(), "No Media",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            int titleColumn = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
-            int idColumn = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
-            do {
-                long thisId = cursor.getLong(idColumn);
-                String thisTitle = cursor.getString(titleColumn);
-                long id = 333;
-                Uri contentUri = ContentUris.withAppendedId(
-                        android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                try {
-                    mediaPlayer.setDataSource(getApplicationContext(), contentUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mediaPlayer.start();
-            } while (cursor.moveToNext());
         }
     }
 }

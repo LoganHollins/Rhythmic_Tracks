@@ -1,12 +1,17 @@
 package com.rhythmictracks.rhythmictracks;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-public class MusicPageFragment extends Fragment {
+import java.io.IOException;
+
+public class MusicPageFragment extends Fragment implements View.OnClickListener {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -27,11 +32,25 @@ public class MusicPageFragment extends Fragment {
 
     public MusicPageFragment() {
     }
-
+    MediaPlayer stronger;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_music_page, container, false);
+
+        stronger = MediaPlayer.create(getActivity(), R.raw.stronger);
+
+        Button play = (Button) rootView.findViewById(R.id.play);
+        play.setOnClickListener(this);
         return rootView;
+    }
+
+    public void onClick(View view) {
+
+        if(stronger.isPlaying()){
+            stronger.stop();
+        } else {
+            stronger.start();
+        }
     }
 }
