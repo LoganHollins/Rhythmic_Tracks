@@ -22,6 +22,7 @@ import android.widget.TextView;
     Button playButton;
     long updatedTime = 0L;
     MediaPlayer stronger;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +86,6 @@ import android.widget.TextView;
 
     public void playKanye(View view)
     {
-
-
         if(stronger == null) {
             stronger = MediaPlayer.create(this, R.raw.stronger);
         }

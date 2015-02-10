@@ -69,10 +69,7 @@ public class RhythmicTracks extends ActionBarActivity implements ActionBar.TabLi
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

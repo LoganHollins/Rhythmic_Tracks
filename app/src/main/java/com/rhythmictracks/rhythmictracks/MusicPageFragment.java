@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import java.io.IOException;
@@ -30,8 +31,7 @@ public class MusicPageFragment extends Fragment {
         return fragment;
     }
 
-    public MusicPageFragment() {
-    }
+    public MusicPageFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

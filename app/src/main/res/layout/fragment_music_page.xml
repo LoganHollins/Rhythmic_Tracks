@@ -19,42 +19,68 @@
         android:layout_below="@+id/section_label"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/">
+        android:id="@+id/layout">
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/exercise_low_speed"
-            android:id="@+id/low_speed"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:nestedScrollingEnabled="false"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="100dp" />
+            android:id="@+id/textView5"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/section_label"
+            android:layout_toEndOf="@+id/section_label"
+            android:textSize="20sp" />
 
-        <Button
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lowSpeedSpinner"
+            android:layout_gravity="center_horizontal"
+            android:spinnerMode="dropdown"
+            android:entries="@array/spinnerItems"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/exercise_medium_speed"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp" />
+            android:id="@+id/textView6"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/section_label"
+            android:layout_toEndOf="@+id/section_label"
+            android:textSize="20sp" />
 
-        <Button
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/medSpeedSpinner"
+            android:layout_gravity="center_horizontal"
+            android:spinnerMode="dropdown"
+            android:entries="@array/spinnerItems"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/exercise_high_speed"
-            android:id="@+id/button2"
+            android:id="@+id/textView7"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/section_label"
+            android:layout_toEndOf="@+id/section_label"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/highSpeedSpinner"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp" />
+            android:spinnerMode="dropdown"
+            android:entries="@array/spinnerItems"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp" />
+
     </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play"
-        android:id="@+id/play"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:nestedScrollingEnabled="false" />
 
 </RelativeLayout>
