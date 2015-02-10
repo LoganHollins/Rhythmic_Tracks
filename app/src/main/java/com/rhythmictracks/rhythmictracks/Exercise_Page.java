@@ -17,7 +17,6 @@ public class Exercise_Page extends ActionBarActivity {
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
-    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +41,22 @@ public class Exercise_Page extends ActionBarActivity {
 
             updatedTime = timeSwapBuff + timeInMilliseconds;
 
-            int secs = (int) (updatedTime / 1000);
+            int secs = (int) (updatedTime / 5 );
             int mins = secs / 60;
+            int hours = secs / 3600;
             secs = secs % 60;
+            mins = mins % 60;
             int milliseconds = (int) (updatedTime % 1000);
-            timerValue.setText("Timer: " + mins + ":"
-                    + String.format("%02d", secs) + ":"
-                    + String.format("%03d", milliseconds));
+            if(hours >= 1) {
+                timerValue.setText("Timer: " + hours + ":" + String.format("%02d", mins) + ":"
+                        + String.format("%02d", secs) + ":"
+                        + String.format("%03d", milliseconds));
+            }
+            else {
+                timerValue.setText("Timer: " + String.format("%02d", mins) + ":"
+                        + String.format("%02d", secs) + ":"
+                        + String.format("%03d", milliseconds));
+            }
             customHandler.postDelayed(this, 0);
         }
 

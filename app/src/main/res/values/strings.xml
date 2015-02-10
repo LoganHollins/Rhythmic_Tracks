@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Rythmic Tracks</string>
+    <string name="app_name">Rhythmic Tracks</string>
     <string name="Home_Page">Home</string>
     <string name="Music_Page">Music</string>
     <string name="Statistics_Page">Stats</string>
