@@ -1,22 +1,27 @@
 package com.rhythmictracks.rhythmictracks;
 
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 
-public class Exercise_Page extends ActionBarActivity {
+    public class Exercise_Page extends ActionBarActivity {
     private TextView timerValue;
     private long startTime = 0L;
     private Handler customHandler = new Handler();
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
+    Button playButton;
     long updatedTime = 0L;
+    MediaPlayer stronger;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +29,7 @@ public class Exercise_Page extends ActionBarActivity {
         timerValue = (TextView) findViewById(R.id.exercise_timer);
         startTime = SystemClock.uptimeMillis();
         customHandler.postDelayed(updateTimerThread, 0);
+        playButton = (Button) findViewById(R.id.play_button);
     }
 
 
@@ -41,7 +47,7 @@ public class Exercise_Page extends ActionBarActivity {
 
             updatedTime = timeSwapBuff + timeInMilliseconds;
 
-            int secs = (int) (updatedTime / 5 );
+            int secs = (int) (updatedTime / 1000 );
             int mins = secs / 60;
             int hours = secs / 3600;
             secs = secs % 60;
@@ -75,6 +81,22 @@ public class Exercise_Page extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void playKanye(View view)
+    {
+
+
+        if(stronger == null) {
+            stronger = MediaPlayer.create(this, R.raw.stronger);
+        }
+        if(stronger.isPlaying()){
+            stronger.pause();
+            playButton.setText("Play");
+        } else {
+            stronger.start();
+            playButton.setText("Pause");
+        }
     }
 }
 

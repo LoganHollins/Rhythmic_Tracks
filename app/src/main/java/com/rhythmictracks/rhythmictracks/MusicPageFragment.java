@@ -11,7 +11,7 @@ import android.widget.Button;
 
 import java.io.IOException;
 
-public class MusicPageFragment extends Fragment implements View.OnClickListener {
+public class MusicPageFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -32,25 +32,11 @@ public class MusicPageFragment extends Fragment implements View.OnClickListener 
 
     public MusicPageFragment() {
     }
-    MediaPlayer stronger;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_music_page, container, false);
-
-        stronger = MediaPlayer.create(getActivity(), R.raw.stronger);
-
-        Button play = (Button) rootView.findViewById(R.id.play);
-        play.setOnClickListener(this);
         return rootView;
-    }
-
-    public void onClick(View view) {
-
-        if(stronger.isPlaying()){
-            stronger.stop();
-        } else {
-            stronger.start();
-        }
     }
 }
