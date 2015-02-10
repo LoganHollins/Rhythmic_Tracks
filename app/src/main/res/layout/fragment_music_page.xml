@@ -11,6 +11,43 @@
     <TextView
         android:id="@+id/section_label" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/section_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exercise_low_speed"
+            android:id="@+id/low_speed"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:nestedScrollingEnabled="false"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exercise_medium_speed"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exercise_high_speed"
+            android:id="@+id/button2"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp" />
+    </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
