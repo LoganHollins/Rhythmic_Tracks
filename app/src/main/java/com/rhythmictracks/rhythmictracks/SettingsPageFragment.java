@@ -1,12 +1,19 @@
 package com.rhythmictracks.rhythmictracks;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
 
-public class SettingsPageFragment extends Fragment {
+public class SettingsPageFragment extends Fragment implements View.OnClickListener{
+    public static boolean showmil = false;
+    CheckBox toggleMil;
+    Button saveChange;
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -24,6 +31,16 @@ public class SettingsPageFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    public void onClick(View v){
+        showmil = showMilchange();
+        Toast.makeText(getActivity(), "Changes Saved", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean showMilchange(){
+       return toggleMil.isChecked();
+    }
+
+
 
     public SettingsPageFragment() {
     }
@@ -32,6 +49,9 @@ public class SettingsPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings_page, container, false);
+        toggleMil = (CheckBox) rootView.findViewById(R.id.ToggleMilSec);
+        saveChange = (Button) rootView.findViewById(R.id.savebutton);
+        saveChange.setOnClickListener(this);
         return rootView;
     }
 }

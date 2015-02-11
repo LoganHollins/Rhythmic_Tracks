@@ -14,5 +14,7 @@
     <string name="exercise_low_speed">Low Speed Music</string>
     <string name="exercise_medium_speed">Medium Speed Music</string>
     <string name="exercise_high_speed">High Speed Music</string>
+    <string name="togglemil">Show Milliseconds on Timer</string>
+    <string name="savechanges">Save Changes</string>
 
 </resources>

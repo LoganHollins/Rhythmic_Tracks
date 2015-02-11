@@ -54,15 +54,23 @@ import android.widget.TextView;
             secs = secs % 60;
             mins = mins % 60;
             int milliseconds = (int) (updatedTime % 1000);
-            if(hours >= 1) {
+            if(hours >= 1 && SettingsPageFragment.showmil) {
                 timerValue.setText("Timer: " + hours + ":" + String.format("%02d", mins) + ":"
                         + String.format("%02d", secs) + ":"
                         + String.format("%03d", milliseconds));
             }
-            else {
+            else if (hours >= 1 && !SettingsPageFragment.showmil){
+                timerValue.setText("Timer: "  + hours + ":" + String.format("%02d", mins) + ":"
+                        + String.format("%02d", secs));
+            }
+            else if (hours < 1 && SettingsPageFragment.showmil){
                 timerValue.setText("Timer: " + String.format("%02d", mins) + ":"
                         + String.format("%02d", secs) + ":"
                         + String.format("%03d", milliseconds));
+            }
+            else if (hours < 1 && !SettingsPageFragment.showmil){
+                timerValue.setText("Timer: " + String.format("%02d", mins) + ":"
+                        + String.format("%02d", secs));
             }
             customHandler.postDelayed(this, 0);
         }
