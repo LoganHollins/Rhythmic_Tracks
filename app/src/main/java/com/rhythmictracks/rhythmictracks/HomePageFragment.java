@@ -44,6 +44,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener{
 
 
     public void onClick(View arg0) {
+        MusicPageFragment.songSelect();
         Intent intent = new Intent(getActivity(), Exercise_Page.class);
         startActivity(intent);
     }

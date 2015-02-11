@@ -21,7 +21,7 @@ import android.widget.TextView;
     long timeSwapBuff = 0L;
     Button playButton;
     long updatedTime = 0L;
-    MediaPlayer stronger;
+    MediaPlayer lowMusic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,17 +91,27 @@ import android.widget.TextView;
 
         return super.onOptionsItemSelected(item);
     }
+    public MediaPlayer findLowSong(){
+        if(MusicPageFragment.lowSong.equals("Barbie")){
+            return  MediaPlayer.create(this, R.raw.barbie);
+        } else if(MusicPageFragment.lowSong.equals("Daft Punk")){
+            return MediaPlayer.create(this, R.raw.daftpunk);
+        } else if(MusicPageFragment.lowSong.equals("Kanye")){
+            return MediaPlayer.create(this, R.raw.stronger);
+        }
+        return MediaPlayer.create(this, R.raw.stronger);
+    }
 
     public void playKanye(View view)
     {
-        if(stronger == null) {
-            stronger = MediaPlayer.create(this, R.raw.barbie);
+        if(lowMusic == null) {
+            lowMusic = findLowSong();
         }
-        if(stronger.isPlaying()){
-            stronger.pause();
+        if(lowMusic.isPlaying()){
+            lowMusic.pause();
             playButton.setText("Play");
         } else {
-            stronger.start();
+            lowMusic.start();
             playButton.setText("Pause");
         }
     }

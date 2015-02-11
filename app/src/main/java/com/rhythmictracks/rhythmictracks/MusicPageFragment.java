@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import java.io.IOException;
 
 public class MusicPageFragment extends Fragment {
+    public static String lowSong;
+    static Spinner lowSongSelect;
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -30,6 +33,9 @@ public class MusicPageFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    public static void songSelect(){
+        lowSong = lowSongSelect.getSelectedItem().toString();
+    }
 
     public MusicPageFragment() {}
 
@@ -37,6 +43,7 @@ public class MusicPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_music_page, container, false);
+        lowSongSelect = (Spinner) rootView.findViewById(R.id.lowSpeedSpinner);
         return rootView;
     }
 }
