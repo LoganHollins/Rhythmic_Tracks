@@ -95,7 +95,7 @@ import android.widget.TextView;
     public void playKanye(View view)
     {
         if(stronger == null) {
-            stronger = MediaPlayer.create(this, R.raw.stronger);
+            stronger = MediaPlayer.create(this, R.raw.barbie);
         }
         if(stronger.isPlaying()){
             stronger.pause();
