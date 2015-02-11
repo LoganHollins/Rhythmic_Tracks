@@ -14,5 +14,9 @@
     <string name="exercise_low_speed">Low Speed Music</string>
     <string name="exercise_medium_speed">Medium Speed Music</string>
     <string name="exercise_high_speed">High Speed Music</string>
+    <string name="kanye">Kanye</string>
+    <string name="barbie">Barbie</string>
+    <string name="daftpunk">Daft Punk</string>
+
 
 </resources>

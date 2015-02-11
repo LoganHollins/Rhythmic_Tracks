@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="spinnerItems">
-        <item>Baribie</item>
-        <item>Stanger</item>
-        <item>Dauf Pank</item>
+        <item>@string/barbie</item>
+        <item>@string/daftpunk</item>
+        <item>@string/kanye</item>
     </string-array>
 </resources>
