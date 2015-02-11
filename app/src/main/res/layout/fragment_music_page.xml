@@ -59,6 +59,7 @@
             android:spinnerMode="dropdown"
             android:entries="@array/spinnerItems"
             android:layout_marginTop="20dp"
+            android:textSize="40pt"
             android:layout_marginBottom="10dp" />
 
         <TextView

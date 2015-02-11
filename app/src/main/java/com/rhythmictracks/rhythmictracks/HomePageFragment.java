@@ -31,7 +31,6 @@ public class HomePageFragment extends Fragment implements View.OnClickListener{
 
     public HomePageFragment() {
     }
- View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
