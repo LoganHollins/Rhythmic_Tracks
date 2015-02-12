@@ -101,11 +101,17 @@ import android.widget.TextView;
         }
         return MediaPlayer.create(this, R.raw.stronger);
     }
-@Override
-public void onPause() {
-    super.onPause();
-    lowMusic.stop(); // Stops music when back button is pressed.  Can no longer layer songs ontop of each other
-}
+/*@Override
+public void onStop() {
+    super.onStop();
+    if (lowMusic != null) {
+        if (lowMusic.isPlaying()) {
+            lowMusic.stop(); // Stops music when back button is pressed.  Can no longer layer songs ontop of each other
+        }
+    }
+
+
+}*/
     public void playKanye(View view)
     {
         if(lowMusic == null) {
