@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/medSpeedSpinner"
             android:layout_gravity="center_horizontal"
-            android:spinnerMode="dropdown"
+            android:spinnerMode="dialog"
             android:entries="@array/spinnerItems"
             android:layout_marginTop="20dp"
             android:textSize="40pt"
