@@ -1,11 +1,17 @@
 package com.rhythmictracks.rhythmictracks;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-    public class Exercise_Page extends ActionBarActivity {
+public class Exercise_Page extends ActionBarActivity {
     private TextView timerValue;
     private long startTime = 0L;
     private Handler customHandler = new Handler();
@@ -21,7 +27,8 @@ import android.widget.TextView;
     long timeSwapBuff = 0L;
     Button playButton;
     long updatedTime = 0L;
-    MediaPlayer lowMusic;
+    public static final String LOGGING_TAG = "Start Music Player:";
+    public static MediaPlayer player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,7 @@ import android.widget.TextView;
         getMenuInflater().inflate(R.menu.menu_exercise__page, menu);
         return true;
     }
+
     private Runnable updateTimerThread = new Runnable() {
 
         public void run() {
@@ -48,27 +56,24 @@ import android.widget.TextView;
 
             updatedTime = timeSwapBuff + timeInMilliseconds;
 
-            int secs = (int) (updatedTime / 1000 );
+            int secs = (int) (updatedTime / 1000);
             int mins = secs / 60;
             int hours = secs / 3600;
             secs = secs % 60;
             mins = mins % 60;
             int milliseconds = (int) (updatedTime % 1000);
-            if(hours >= 1 && SettingsPageFragment.showmil) {
+            if (hours >= 1 && SettingsPageFragment.showmil) {
                 timerValue.setText("Timer: " + hours + ":" + String.format("%02d", mins) + ":"
                         + String.format("%02d", secs) + ":"
                         + String.format("%03d", milliseconds));
-            }
-            else if (hours >= 1 && !SettingsPageFragment.showmil){
-                timerValue.setText("Timer: "  + hours + ":" + String.format("%02d", mins) + ":"
+            } else if (hours >= 1 && !SettingsPageFragment.showmil) {
+                timerValue.setText("Timer: " + hours + ":" + String.format("%02d", mins) + ":"
                         + String.format("%02d", secs));
-            }
-            else if (hours < 1 && SettingsPageFragment.showmil){
+            } else if (hours < 1 && SettingsPageFragment.showmil) {
                 timerValue.setText("Timer: " + String.format("%02d", mins) + ":"
                         + String.format("%02d", secs) + ":"
                         + String.format("%03d", milliseconds));
-            }
-            else if (hours < 1 && !SettingsPageFragment.showmil){
+            } else if (hours < 1 && !SettingsPageFragment.showmil) {
                 timerValue.setText("Timer: " + String.format("%02d", mins) + ":"
                         + String.format("%02d", secs));
             }
@@ -91,38 +96,52 @@ import android.widget.TextView;
 
         return super.onOptionsItemSelected(item);
     }
-    public MediaPlayer findLowSong(){
-        if(MusicPageFragment.lowSong.equals("Barbie")){
-            return  MediaPlayer.create(this, R.raw.barbie);
-        } else if(MusicPageFragment.lowSong.equals("Daft Punk")){
-            return MediaPlayer.create(this, R.raw.daftpunk);
-        } else if(MusicPageFragment.lowSong.equals("Kanye")){
-            return MediaPlayer.create(this, R.raw.stronger);
-        }
-        return MediaPlayer.create(this, R.raw.stronger);
-    }
-/*@Override
-public void onStop() {
-    super.onStop();
-    if (lowMusic != null) {
-        if (lowMusic.isPlaying()) {
-            lowMusic.stop(); // Stops music when back button is pressed.  Can no longer layer songs ontop of each other
-        }
-    }
 
+    public void startPlaylist(View view) {
 
-}*/
-    public void playKanye(View view)
-    {
-        if(lowMusic == null) {
-            lowMusic = findLowSong();
+        if(player == null) {
+            playTrackFromPlaylist(MusicPageFragment.returnPlayListId());
+            playButton.setText("Pause");
         }
-        if(lowMusic.isPlaying()){
-            lowMusic.pause();
+         else if(player.isPlaying()){
+            player.pause();
             playButton.setText("Play");
         } else {
-            lowMusic.start();
+            player.start();
             playButton.setText("Pause");
+        }
+    }
+
+
+
+    public void playAudio(final String path) {
+        player = new MediaPlayer();
+        player.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
+        if (path == null) {
+            Log.e(LOGGING_TAG, "Called playAudio with null data stream.");
+            return;
+        }
+        try {
+            player.setDataSource(path);
+            player.prepare();
+            player.start();
+            Log.i(LOGGING_TAG, "Success in starting MediaPlayer");
+        } catch (Exception e) {
+            Log.e(LOGGING_TAG, "Failed to start MediaPlayer: " + e.getMessage());
+        }
+    }
+
+    public void playTrackFromPlaylist(final long playListID) {
+        final ContentResolver resolver = this.getContentResolver();
+        final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", playListID);
+        final String dataKey = MediaStore.Audio.Media.DATA;
+        Cursor tracks = resolver.query(uri, new String[]{dataKey}, null, null, null);
+        if (tracks != null) {
+            tracks.moveToFirst();
+            final int dataIndex = tracks.getColumnIndex(dataKey);
+            final String dataPath = tracks.getString(dataIndex);
+            playAudio(dataPath);
+            tracks.close();
         }
     }
 }
