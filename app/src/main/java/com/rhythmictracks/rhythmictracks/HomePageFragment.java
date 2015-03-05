@@ -10,7 +10,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import logger.Log;
+import logger.LogView;
+import logger.LogWrapper;
+import logger.MessageOnlyLogFilter;
+
 public class HomePageFragment extends Fragment implements View.OnClickListener{
+
+    // Google FIT API static variables
+    public static final String TAG = "BasicSensorsApi";
+
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -38,8 +47,19 @@ public class HomePageFragment extends Fragment implements View.OnClickListener{
         Button upButton = (Button) rootView.findViewById(R.id.start_button);
         upButton.setOnClickListener(this);
 
-        return rootView;
+        // Wraps Android's native log framework.
+        LogWrapper logWrapper = new LogWrapper();
+        // Using Log, front-end to the logging chain, emulates android.util.log method signatures.
+        Log.setLogNode(logWrapper);
+        // Filter strips out everything except the message text.
+        MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
+        logWrapper.setNext(msgFilter);
+        // On screen logging via a customized TextView.
+        LogView logView = (LogView) rootView.findViewById(R.id.sample_logview);
+        msgFilter.setNext(logView);
+        Log.i(TAG, "Ready");
 
+        return rootView;
     }
 
 
