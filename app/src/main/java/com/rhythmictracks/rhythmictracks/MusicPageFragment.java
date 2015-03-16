@@ -100,7 +100,10 @@ public class MusicPageFragment extends Fragment {
      * Returns selected item from the spinner as a string
      */
     public static void songSelect(){
-        lowSong = lowSongSelect.getSelectedItem().toString();
+        Object o = lowSongSelect.getSelectedItem();
+        if(o != null) {
+            lowSong = o.toString();
+        }
 
     }
 

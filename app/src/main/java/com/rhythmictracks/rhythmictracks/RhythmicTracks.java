@@ -1,5 +1,7 @@
 package com.rhythmictracks.rhythmictracks;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +9,10 @@ import java.util.concurrent.TimeUnit;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -83,6 +89,11 @@ public class RhythmicTracks extends ActionBarActivity implements ActionBar.TabLi
     // method in order to stop all sensors from sending data to this listener.
     private OnDataPointListener mListener;
     // [END mListener_variable_reference]
+    public int latset = 0;
+    public int longset = 0;
+    public int altset = 0;
+    public int accset = 0;
+    public Deque<Location> loc = new ArrayDeque();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -384,10 +395,38 @@ public class RhythmicTracks extends ActionBarActivity implements ActionBar.TabLi
         mListener = new OnDataPointListener() {
             @Override
             public void onDataPoint(DataPoint dataPoint) {
+                Location l = new Location("");
                 for (Field field : dataPoint.getDataType().getFields()) {
                     Value val = dataPoint.getValue(field);
                     Log.i(TAG, "Detected DataPoint field: " + field.getName());
                     Log.i(TAG, "Detected DataPoint value: " + val);
+                    if(field.getName().equals("latitude")){
+                        l.setLatitude(val.asFloat());
+                        latset = 1;
+                    } else if(field.getName().equals("longitude")){
+                        l.setLongitude(val.asFloat());
+                        longset = 1;
+                    } else if(field.getName().equals("altitude")) {
+                        l.setAltitude(val.asFloat());
+                        altset = 1;
+                    }else if(field.getName().equals("accuracy")) {
+                        l.setAccuracy(val.asFloat());
+                        accset = 1;
+                    }
+                    if(longset == 1 && latset == 1 && accset == 1 && altset == 1) {
+                        longset = 0;
+                        latset = 0;
+                        accset = 0;
+                        altset = 0;
+                        loc.addLast(l);
+                        Log.i(TAG, "stack size " + loc.size());
+                        if (loc.size() >= 2) {
+                            Location temp = loc.removeLast();
+                            Float dist = temp.distanceTo(loc.getLast());
+                            loc.addLast(temp);
+                            Log.i(TAG, "Distance changed: " + dist + " metres");
+                        }
+                    }
                 }
             }
         };
