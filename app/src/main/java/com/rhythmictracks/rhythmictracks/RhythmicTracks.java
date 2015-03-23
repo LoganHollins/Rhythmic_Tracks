@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -45,7 +46,10 @@ import logger.LogWrapper;
 import logger.MessageOnlyLogFilter;
 
 
-public class RhythmicTracks extends ActionBarActivity implements ActionBar.TabListener {
+public class RhythmicTracks extends ActionBarActivity implements ActionBar.TabListener{
+
+    //Private Handler for the location request
+    private Handler handler;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -128,7 +132,7 @@ public class RhythmicTracks extends ActionBarActivity implements ActionBar.TabLi
         if (savedInstanceState != null) {
             authInProgress = savedInstanceState.getBoolean(AUTH_PENDING);
         }
-
+        handler = new Handler();
         buildFitnessClient();
     }
     // [END auth_oncreate_setup_ending]
@@ -380,17 +384,31 @@ public class RhythmicTracks extends ActionBarActivity implements ActionBar.TabLi
      * {@link DataType} combo.
      */
     private void registerFitnessDataListener(DataSource dataSource, DataType dataType) {
-        // [START register_data_listener]
         mListener = new OnDataPointListener() {
             @Override
-            public void onDataPoint(DataPoint dataPoint) {
+            public void onDataPoint(final DataPoint dataPoint) {
                 for (Field field : dataPoint.getDataType().getFields()) {
                     Value val = dataPoint.getValue(field);
                     Log.i(TAG, "Detected DataPoint field: " + field.getName());
                     Log.i(TAG, "Detected DataPoint value: " + val);
                 }
+                Runnable getLocation = new Runnable() {
+                    @Override
+                    public void run() {
+                        for (Field field : dataPoint.getDataType().getFields()) {
+                            Value val = dataPoint.getValue(field);
+                            Log.i(TAG, "Detected DataPoint field: " + field.getName());
+                            Log.i(TAG, "Detected DataPoint value: " + val);
+                        }
+                        handler.postDelayed(this, 100);
+                    }
+                };
+
+                getLocation.run();
+
             }
         };
+        // [START register_data_listener]
 
         Fitness.SensorsApi.add(
                 mClient,
