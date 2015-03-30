@@ -47,18 +47,6 @@ public class HomePageFragment extends Fragment implements View.OnClickListener{
         Button upButton = (Button) rootView.findViewById(R.id.start_button);
         upButton.setOnClickListener(this);
 
-        // Wraps Android's native log framework.
-        LogWrapper logWrapper = new LogWrapper();
-        // Using Log, front-end to the logging chain, emulates android.util.log method signatures.
-        Log.setLogNode(logWrapper);
-        // Filter strips out everything except the message text.
-        MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
-        logWrapper.setNext(msgFilter);
-        // On screen logging via a customized TextView.
-        LogView logView = (LogView) rootView.findViewById(R.id.sample_logview);
-        msgFilter.setNext(logView);
-        Log.i(TAG, "Ready");
-
         return rootView;
     }
 
