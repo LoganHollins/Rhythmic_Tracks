@@ -10,10 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import logger.Log;
-import logger.LogView;
-import logger.LogWrapper;
-import logger.MessageOnlyLogFilter;
+
 
 public class HomePageFragment extends Fragment implements View.OnClickListener{
 

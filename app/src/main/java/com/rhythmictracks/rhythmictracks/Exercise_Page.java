@@ -21,6 +21,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.util.Set;
+import java.util.Stack;
+
 
 public class Exercise_Page extends ActionBarActivity {
     private TextView timerValue;
@@ -32,10 +36,20 @@ public class Exercise_Page extends ActionBarActivity {
     long updatedTime = 0L;
     public static final String LOGGING_TAG = "Start Music Player:";
     public static MediaPlayer player;
-
+    public DecimalFormat dFormat;
     //LOCATION VARIABLES
     LocationManager locationManager;
-    TextView locationText;
+    TextView topSpeed;
+    TextView avgSpeed;
+    TextView currentSpeed;
+    TextView totalDistance;
+    Location lastLoc;
+    //Speed/distance variables
+    float maxSpeed = -1; // initialized to negative so first speed always higher
+    float totalDist = 0;
+    double avg = 0.0;
+    int amountSpeed = 0;
+
 
     private static final int FIVE_SECONDS = 1000 * 5;
 
@@ -47,8 +61,11 @@ public class Exercise_Page extends ActionBarActivity {
         startTime = SystemClock.uptimeMillis();
         customHandler.postDelayed(updateTimerThread, 0);
         playButton = (Button) findViewById(R.id.play_button);
-
-        locationText = (TextView) findViewById(R.id.locationText);
+        //initialize all views that will be display while running
+        topSpeed = (TextView) findViewById(R.id.topSpeed);
+        avgSpeed = (TextView) findViewById(R.id.avgSpeed);
+        currentSpeed = (TextView) findViewById(R.id.currentSpeed);
+        totalDistance = (TextView) findViewById(R.id.totalDistance);
         createLocationListener();
     }
 
@@ -159,12 +176,12 @@ public class Exercise_Page extends ActionBarActivity {
 
     public void createLocationListener() {
         // Acquire a reference to the system Location Manager
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
         // Define a listener that responds to location updates
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                locationText.setText(Float.toString((location.getSpeed())));
+                calcLocation(SettingsPageFragment.showMS, location);
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -234,6 +251,45 @@ public class Exercise_Page extends ActionBarActivity {
             return provider2 == null;
         }
         return provider1.equals(provider2);
+    }
+
+    private void calcLocation(boolean metre, Location location) {
+        float cSpeed = location.getSpeed();
+        amountSpeed++;
+        if (!metre) {
+            //KM/H
+            dFormat = new DecimalFormat("#0.00");
+            cSpeed *= 3.6;
+            avg += cSpeed;
+            if (cSpeed > maxSpeed) {
+                maxSpeed = cSpeed;
+                topSpeed.setText(dFormat.format(maxSpeed) + " km/h");
+            }
+            currentSpeed.setText(dFormat.format(cSpeed) + " km/h");
+            if (lastLoc != null) {
+                float tempdist = lastLoc.distanceTo(location);
+                totalDist += tempdist;
+            }
+            totalDistance.setText( dFormat.format(totalDist / 1000) + " km");
+            lastLoc = location;
+            avgSpeed.setText(dFormat.format(avg / amountSpeed) + " km/h");
+        } else{
+            //Metres a second
+            dFormat = new DecimalFormat("#0.0");
+            avg += cSpeed;
+            if (cSpeed > maxSpeed) {
+                maxSpeed = cSpeed;
+                topSpeed.setText(dFormat.format(maxSpeed) + " m/s");
+            }
+            currentSpeed.setText(dFormat.format(cSpeed) + " m/s");
+            if (lastLoc != null) {
+                float tempdist = lastLoc.distanceTo(location);
+                totalDist += tempdist;
+            }
+            totalDistance.setText(dFormat.format(totalDist) + " m");
+            lastLoc = location;
+            avgSpeed.setText(dFormat.format(avg / amountSpeed) + " m/s");
+        }
     }
 }
 

@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 public class SettingsPageFragment extends Fragment implements View.OnClickListener{
     public static boolean showmil = false;
+    public static boolean showMS = false;
     CheckBox toggleMil;
     Button saveChange;
+    CheckBox toggleMS;
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -33,12 +35,14 @@ public class SettingsPageFragment extends Fragment implements View.OnClickListen
     }
     public void onClick(View v){
         showmil = showMilchange();
+        showMS = showMSchange();
         Toast.makeText(getActivity(), "Changes Saved", Toast.LENGTH_SHORT).show();
     }
 
     public boolean showMilchange(){
        return toggleMil.isChecked();
     }
+    public boolean showMSchange() { return toggleMS.isChecked(); }
 
 
 
@@ -50,6 +54,7 @@ public class SettingsPageFragment extends Fragment implements View.OnClickListen
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings_page, container, false);
         toggleMil = (CheckBox) rootView.findViewById(R.id.ToggleMilSec);
+        toggleMS = (CheckBox) rootView.findViewById(R.id.ToggleMS);
         saveChange = (Button) rootView.findViewById(R.id.savebutton);
         saveChange.setOnClickListener(this);
         return rootView;

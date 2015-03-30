@@ -18,8 +18,8 @@
     <string name="kanye">Kanye</string>
     <string name="barbie">Barbie</string>
     <string name="daftpunk">Daft Punk</string>
-
     <string name="togglemil">Show Milliseconds on Timer</string>
+    <string name="toggleMetres">M/S instead of KM/H</string>
     <string name="savechanges">Save Changes</string>
 
 </resources>

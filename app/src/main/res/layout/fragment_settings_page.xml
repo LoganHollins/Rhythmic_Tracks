@@ -35,6 +35,21 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/toggleMetres"
+                android:id="@+id/ToggleMS"
+                android:layout_column="1"
+                android:checked="false"
+                android:textSize="20sp"
+                android:nestedScrollingEnabled="false" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

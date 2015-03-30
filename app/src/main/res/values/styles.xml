@@ -6,11 +6,5 @@
         <item name="android:windowBackground">@color/White</item>
     </style>
 
-    <style name="Log" parent="AppTheme">
-        <item name="android:typeface">monospace</item>
-        <item name="android:padding">@dimen/margin_medium</item>
-        <item name="android:textAppearance">?android:textAppearanceMedium</item>
-        <item name="android:lineSpacingMultiplier">1.1</item>
-    </style>
 
 </resources>
