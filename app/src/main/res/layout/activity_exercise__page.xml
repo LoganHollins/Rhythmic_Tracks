@@ -19,15 +19,23 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:height="100dp"
+        android:background="@color/Orange"
+        android:textSize="40sp"
+        android:textColor="@color/White" />
 
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/play_button"
+        android:layout_margin="10dp">
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,12 +45,14 @@
                 android:id="@+id/exercise_timer"
                 android:layout_column="0"
                 android:layout_weight="1"
-                android:gravity="center" />
+                android:gravity="center"
+                android:layout_gravity="center" />
         </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -50,7 +60,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Top Speed:"
                 android:id="@+id/textView3"
-                android:layout_column="0" />
+                android:layout_column="0"
+                android:textIsSelectable="true"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,13 +74,16 @@
                 android:layout_column="1"
                 android:layout_span="2"
                 android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center" />
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:textIsSelectable="true"
+                android:layout_margin="5dp" />
         </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,7 +91,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Current Speed:"
                 android:id="@+id/textView8"
-                android:layout_column="0" />
+                android:layout_column="0"
+                android:textIsSelectable="true"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -86,21 +105,27 @@
                 android:layout_column="1"
                 android:gravity="center"
                 android:layout_span="2"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1" />
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textIsSelectable="true"
+                android:layout_margin="5dp" />
         </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Top Speed:"
+                android:text="Average Speed:"
                 android:id="@+id/textView9"
-                android:layout_column="0" />
+                android:layout_column="0"
+                android:textIsSelectable="true"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -111,12 +136,16 @@
                 android:layout_column="1"
                 android:layout_weight="1"
                 android:layout_span="2"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textIsSelectable="true"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical" />
         </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -124,7 +153,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Distance:"
                 android:id="@+id/textView10"
-                android:layout_column="0" />
+                android:layout_column="0"
+                android:textIsSelectable="true"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -135,7 +167,10 @@
                 android:layout_column="1"
                 android:gravity="center"
                 android:layout_span="2"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:textIsSelectable="true"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical" />
         </TableRow>
     </TableLayout>
 
