@@ -56,7 +56,7 @@
         android:height="100dp"
         android:background="@color/Orange"
         android:textColor="@color/White"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:longClickable="false" />
 
 </RelativeLayout>

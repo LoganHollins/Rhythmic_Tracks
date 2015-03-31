@@ -2,6 +2,7 @@ package com.rhythmictracks.rhythmictracks;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationListener;
@@ -69,7 +70,18 @@ public class Exercise_Page extends ActionBarActivity {
         createLocationListener();
     }
 
+    public void savetoDB(View view){
+        double finalavgspeed = 0;
+        if(amountSpeed > 0) finalavgspeed = avg / amountSpeed;
+        DatabaseHandler db = new DatabaseHandler(this);
+        RunStats rs = new RunStats((double)maxSpeed, finalavgspeed, (double)totalDist, (double)updatedTime);
 
+        db.addRunStats(rs);
+        Intent intent = new Intent(this, RhythmicTracks.class);
+        startActivity(intent);
+
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
